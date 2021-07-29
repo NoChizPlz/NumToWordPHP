@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Number to word Generator</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>$(document).ready(function(){$("#num").keypress(function(e){13===e.which&&$("#btn").click()}),$("#btn").click(function(){const e=$("#num").val();e>99999999999999?(alert("Less than 100 Trillion only"),document.getElementById("num").value="",document.getElementById("result").value=""):$.ajax({type:"POST",url:"./",data:{number:e}}).then(function(e){let n=JSON.parse(e);if(!0===n.s){let e=n.dollar,l=n.cent,t="";null!==e&&("ONE "===e||"NEGATIVE ONE "===e||"ZERO "===e?("ONE "!==e&&"NEGATIVE ONE "!==e||(t=e+"DOLLAR"),"ZERO "===e&&null===l&&(t=e+"DOLLAR")):t=e+"DOLLARS"),null!==e&&"ZERO "!==e&&null!==l&&(t+=" AND "),null!==l&&(t="ONE "===l?t+l+"CENT":t+l+"CENTS"),document.getElementById("result").innerHTML=t}else document.getElementById("result").innerHTML=n.message},function(){alert("There was some error!")})})});</script>
+</head>
+<body>
+<div class="box">
+    <h1>Number to word Generator</h1>
+    <p><b>Note:</b>Less than 100 Trillion only</p>
+    <div class="form">
+        <input type="number" id="num" placeholder="Enter Number Here" max="99999999999999" class="inputbox">
+        <textarea id="result" rows="10" cols="50" placeholder="Result" class="inputbox" disabled></textarea>
+        <div>
+            <button id="btn">Generate</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
